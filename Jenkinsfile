@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo "Testing .... dg mix teh"
+                echo "Testing auto Deploy at KB Prasac Bank"
             }
         }
         stage('Deploy') {
@@ -29,7 +29,7 @@ pipeline {
                         echo 'No existing container'
                     }
                 }
-                sh 'docker run -d -p 3000:3000 --name ${MY_IMAGE} ${MY_IMAGE}'
+                sh 'docker run -d -p 3000:3001 --name ${MY_IMAGE} ${MY_IMAGE}'
             }
         }
     }
