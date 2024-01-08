@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        node{
-            label 'Built-In Node'
-        }
-    }
+    agent any
     tools{
         nodejs 'npm'
     }
@@ -18,7 +14,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo "Testing auto Deploy at KB Prasac Bank"
+                echo "Testing auto Deploy at KB Prasac...."
             }
         }
         stage('Deploy') {
