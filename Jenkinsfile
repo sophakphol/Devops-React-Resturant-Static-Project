@@ -61,7 +61,7 @@ pipeline {
                             sh "docker run -d -p 3001:80 --name ${MY_IMAGE} -e DOCKER_USERNAME=$DOCKER_USERNAME -e DOCKER_PASSWORD=$DOCKER_PASSWORD ${MY_IMAGE}"
                         }
                         def status = currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'Succeed' : 'Failed'
-                        sendToTelegram("🚀 Deployment Status: ${status} for Build #${BUILD_NUMBER}")
+                        sendToTelegram("🚀Boom Deploy Successfully! 🚀  Deployment Status: ${status} for Build #${BUILD_NUMBER}")
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         currentBuild.description = e.toString()
