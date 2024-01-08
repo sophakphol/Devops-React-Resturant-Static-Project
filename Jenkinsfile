@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node{
-            label 'jenkins_worker1'
+            label 'master'
         }
     }
     tools {
