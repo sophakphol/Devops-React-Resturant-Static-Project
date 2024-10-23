@@ -45,8 +45,8 @@ pipeline {
                 }
             }
         }
-    }
-}
+    } // Close the stages block
+} // Close the pipeline block
 
 def sendToTelegram(message) {
     script {
@@ -54,4 +54,4 @@ def sendToTelegram(message) {
             curl -s -X POST https://api.telegram.org/bot\${TELEGRAM_BOT_TOKEN}/sendMessage -d chat_id=\${TELEGRAM_CHAT_ID} -d parse_mode="HTML" -d text="${message}"
         """
     }
-}
+} // Close the sendToTelegram function
