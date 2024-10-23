@@ -11,6 +11,22 @@ pipeline {
         TELEGRAM_CHAT_ID = credentials('telegram_chatid')
     }
     stages {
+        stage('Clone Repository') {
+            steps {
+                script {
+                    try {
+                        // Clone the repository
+                        sh "git clone https://github.com/sophakphol/Devops-React-Resturant-Static-Project.git"
+                        sendToTelegram("📁 Repository cloned successfully for Build #${BUILD_NUMBER}")
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        sendToTelegram("❌ Repository cloning failed for Build #${BUILD_NUMBER}\nError Message: ${e.message}")
+                        throw e // Stop the pipeline on failure
+                    }
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 script {
@@ -30,6 +46,7 @@ pipeline {
                 }
             }
         }
+
         stage('Test') {
             steps {
                 script {
@@ -45,8 +62,8 @@ pipeline {
                 }
             }
         }
-    } // Close the stages block
-} // Close the pipeline block
+    }
+}
 
 def sendToTelegram(message) {
     script {
@@ -54,4 +71,4 @@ def sendToTelegram(message) {
             curl -s -X POST https://api.telegram.org/bot\${TELEGRAM_BOT_TOKEN}/sendMessage -d chat_id=\${TELEGRAM_CHAT_ID} -d parse_mode="HTML" -d text="${message}"
         """
     }
-} // Close the sendToTelegram function
+}
